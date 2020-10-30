@@ -3,7 +3,6 @@ C:\Users\Dave\source\repos\Drummers metronome Windows\bin\Debug\Drummers metrono
 C:\Users\Dave\source\repos\Drummers metronome Windows\bin\Debug\Drummers metronome Windows.pdb
 C:\Users\Dave\source\repos\Drummers metronome Windows\bin\Debug\NAudio.dll
 C:\Users\Dave\source\repos\Drummers metronome Windows\bin\Debug\NAudio.xml
-C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers_metronome_Windows.BeatBoxControl.resources
 C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers_metronome_Windows.MetronomeHost.resources
 C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers_metronome_Windows.Properties.Resources.resources
 C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers metronome Windows.csproj.GenerateResource.cache
@@ -13,3 +12,4 @@ C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers metrono
 C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers metronome Windows.pdb
 C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers_metronome_Windows.CounterControl.resources
 C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers metronome Windows.csprojAssemblyReference.cache
+C:\Users\Dave\source\repos\Drummers metronome Windows\obj\Debug\Drummers_metronome_Windows.Constants.resources

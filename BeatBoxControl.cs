@@ -6,12 +6,24 @@ using System.Windows.Forms;
 
 namespace Drummers_metronome_Windows
 {
+    #region Color constants
+    static class Constants
+    {
+        public const string _ACTIVE_COLOR = "OrangeRed";
+        public const string _INACTIVE_COLOR = "Snow";
+    }
+    #endregion
+
     public partial class BeatBoxControl : UserControl
     {
+
+
         #region Fields / Properties
 
         public int CurrentBeat = 1;
         public bool AccentFirstBeat = true;
+        public Color ActiveColor = Color.FromName(Constants._ACTIVE_COLOR);
+        public Color InactiveColor = Color.FromName(Constants._INACTIVE_COLOR);
 
         private int _gutter = 10;
         public int Gutter
@@ -148,6 +160,8 @@ namespace Drummers_metronome_Windows
         int ControlTop;
         public int Gutter;
         public int BeatsPerMeasure;
+        public Color ActiveColor = Color.FromName(Constants._ACTIVE_COLOR);
+        public Color InactiveColor = Color.FromName(Constants._INACTIVE_COLOR);
 
         #region Constructors
         public BeatBoxList()
@@ -197,8 +211,8 @@ namespace Drummers_metronome_Windows
         public int GutterWidth = 10;
         public bool SupressLeftGutter = false;
         public bool IsActive = false;
-        public Color ActiveColor = Color.FromName("Red");
-        public Color InActiveColor = Color.FromName("Blue");
+        public Color ActiveColor = Color.FromName(Constants._ACTIVE_COLOR);
+        public Color InactiveColor = Color.FromName(Constants._INACTIVE_COLOR);
 
         public int BarHeight
         {
@@ -235,7 +249,7 @@ namespace Drummers_metronome_Windows
                 if (IsActive)
                     myBrush = new System.Drawing.SolidBrush(ActiveColor);
                 else
-                    myBrush = new System.Drawing.SolidBrush(InActiveColor);
+                    myBrush = new System.Drawing.SolidBrush(InactiveColor);
 
                 var r = new Rectangle(
                                 BarLeft,

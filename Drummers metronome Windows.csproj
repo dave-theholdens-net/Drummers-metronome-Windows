@@ -49,9 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BeatBoxControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="BeatBoxControl.cs" />
     <Compile Include="BeatBoxControl.Designer.cs">
       <DependentUpon>BeatBoxControl.cs</DependentUpon>
     </Compile>
@@ -107,6 +105,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="HighTone.wav" />
     <Content Include="LowTone.wav" />
   </ItemGroup>
