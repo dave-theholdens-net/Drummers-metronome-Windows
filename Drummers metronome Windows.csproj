@@ -106,8 +106,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="HighTone.wav" />
-    <Content Include="LowTone.wav" />
+    <EmbeddedResource Include="HighTone.wav" />
+    <EmbeddedResource Include="LowTone.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

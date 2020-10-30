@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Drummers_metronome_Windows
 {
-    #region Color constants
+    #region Default color constants
     static class Constants
     {
         public const string _ACTIVE_COLOR = "OrangeRed";
@@ -96,7 +96,7 @@ namespace Drummers_metronome_Windows
             if (PlaybackDevice == null)
                 PlaybackDevice = new OutputDeviceList().FirstOrDefault();
 
-            MyBeatBoxList = new BeatBoxList(this.Width, this.Height, this.Top, Gutter, NumberOfBoxes);
+            MyBeatBoxList = new BeatBoxList(this.Width, this.Height, this.Top, this.Left, Gutter, NumberOfBoxes);
         }
         #endregion
 
@@ -158,6 +158,7 @@ namespace Drummers_metronome_Windows
         int ControlWidth;
         int ControlHeight;
         int ControlTop;
+        int ControlLeft;
         public int Gutter;
         public int BeatsPerMeasure;
         public Color ActiveColor = Color.FromName(Constants._ACTIVE_COLOR);
@@ -168,11 +169,12 @@ namespace Drummers_metronome_Windows
         {
 
         }
-        public BeatBoxList(int width, int height, int top, int gutter, int beatsPerMeasure)
+        public BeatBoxList(int width, int height, int top, int left, int gutter, int beatsPerMeasure)
         {
             ControlWidth = width;
             ControlHeight = height;
             ControlTop = top;
+            ControlLeft = left;
             Gutter = gutter;
             BeatsPerMeasure = beatsPerMeasure;
             MakeBars();
@@ -190,10 +192,9 @@ namespace Drummers_metronome_Windows
                 {
                     Top = ControlTop,
                     Width = (ControlWidth / BeatsPerMeasure),
-                    Left = (ControlWidth / BeatsPerMeasure) * x,
+                    Left = ControlLeft + (ControlWidth / BeatsPerMeasure) * x,
                     Height = ControlHeight,
-                    GutterWidth = Gutter,
-                    SupressLeftGutter = false  // (x == 0)
+                    GutterWidth = Gutter
                 };
                 Add(newBeatBox);
             }
@@ -209,7 +210,6 @@ namespace Drummers_metronome_Windows
         public int Left = 0;
         public int Top = 0;
         public int GutterWidth = 10;
-        public bool SupressLeftGutter = false;
         public bool IsActive = false;
         public Color ActiveColor = Color.FromName(Constants._ACTIVE_COLOR);
         public Color InactiveColor = Color.FromName(Constants._INACTIVE_COLOR);
@@ -220,7 +220,7 @@ namespace Drummers_metronome_Windows
         }
         public int BarWidth
         {
-            get { return Width - (SupressLeftGutter ? 0 : GutterWidth); }
+            get { return Width - GutterWidth; }
         }
         public int BarTop
         {
@@ -228,7 +228,7 @@ namespace Drummers_metronome_Windows
         }
         public int BarLeft
         {
-            get { return Left + (SupressLeftGutter ? 0 : GutterWidth); }
+            get { return Left + GutterWidth; }
         }
         #endregion
 
