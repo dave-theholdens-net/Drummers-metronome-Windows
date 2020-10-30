@@ -36,8 +36,12 @@
     <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +71,13 @@
       <DependentUpon>MetronomeHost.cs</DependentUpon>
     </Compile>
     <Compile Include="OutputDevices.cs" />
+    <Compile Include="Playlist.cs" />
+    <Compile Include="PlaylistEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlaylistEditor.Designer.cs">
+      <DependentUpon>PlaylistEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BeatBoxControl.resx">

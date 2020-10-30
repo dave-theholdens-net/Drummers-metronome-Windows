@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Drummers metronome Windows", "Drummers metronome Windows.csproj", "{A9E3D37C-4DA7-41F4-8733-4841EA4289C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTestProjectDrummersMetronome", "..\NUnitTestProjectDrummersMetronome\NUnitTestProjectDrummersMetronome.csproj", "{08FB9CFD-C3EC-4D59-B272-6F3D892B14F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NUnitTestProjectDrummersMetronome", "..\NUnitTestProjectDrummersMetronome\NUnitTestProjectDrummersMetronome.csproj", "{08FB9CFD-C3EC-4D59-B272-6F3D892B14F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
