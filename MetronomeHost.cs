@@ -116,7 +116,7 @@ namespace Drummers_metronome_Windows
                 playbackDevice = outputDevices.Find(x => x.DeviceName == s.DefaultPlaybackDevice);
                 AccentFirstBeat = s.DefaultAccentFirstBeat;
             }
-            catch(Exception e)
+            catch (Exception)
             {
                 // Do nothing, rely on hard-coded defaults
             }
@@ -133,7 +133,7 @@ namespace Drummers_metronome_Windows
                 s.DefaultAccentFirstBeat = AccentFirstBeat;
                 s.Save();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Do nothing, rely on hard-coded defaults
             }

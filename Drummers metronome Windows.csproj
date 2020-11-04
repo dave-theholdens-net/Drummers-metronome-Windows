@@ -89,6 +89,9 @@
     <EmbeddedResource Include="MetronomeHost.resx">
       <DependentUpon>MetronomeHost.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PlaylistEditor.resx">
+      <DependentUpon>PlaylistEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

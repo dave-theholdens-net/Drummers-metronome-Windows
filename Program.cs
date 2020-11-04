@@ -15,7 +15,7 @@ namespace Drummers_metronome_Windows
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                Application.Run(new MetronomeHost());
+                Application.Run(new PlaylistEditor("TestList.dat"));
             }
             catch(Exception e)
             {

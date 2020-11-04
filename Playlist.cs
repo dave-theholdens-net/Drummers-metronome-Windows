@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Drummers_metronome_Windows
 {
-    public class PlaylistEntry : IDisposable
+    public class PlaylistEntry : IDisposable, IEquatable<PlaylistEntry>, IComparable<PlaylistEntry>
     {
         #region Fields / Properties
         private int id;
@@ -104,6 +104,22 @@ namespace Drummers_metronome_Windows
         public PlaylistEntry() { }
 
         public void Dispose() { }
+
+        public bool Equals(PlaylistEntry other)
+        {
+            if (other == null) return false;
+            return (this.Id.Equals(other.Id));
+        }
+
+        public int CompareTo(PlaylistEntry other)
+        {
+            // A null value means that this object is greater.
+            if (other == null)
+                return 1;
+
+            else
+                return this.OrdinalPosition.CompareTo(other.OrdinalPosition);
+        }
         #endregion
 
         #region Exceptions
@@ -114,83 +130,124 @@ namespace Drummers_metronome_Windows
         #endregion
     }
 
-    public class PlayList : List<PlaylistEntry>
+    public class PlayList
     {
         #region Fields / Properties
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Group { get; set; }
-        public string FileURL { get; set; }
+        public List<PlaylistEntry> Songs { get; set; }
         #endregion
 
         #region Constructors
         public PlayList()
         {
-
+            Songs = new List<PlaylistEntry>();
         }
         public PlayList(string fileURL)
         {
-            FileURL = fileURL;
-            Load();
+            Load(fileURL);
         }
         #endregion
 
         #region Methods
-        public void Load()
+        public void Load(string fileURL)
         {
-            Clear();
-
             // open JSON file and deserialize
-            if(File.Exists(FileURL))
+            if(File.Exists(fileURL))
                 try
                 {
-                    AddRange(JsonConvert.DeserializeObject<List<PlaylistEntry>>(File.ReadAllText(FileURL)));
+                    JsonConvert.PopulateObject(File.ReadAllText(fileURL), this);
                 } catch(JsonException je)
                 {
                     throw new SerializationException("Unable to deserialize playlist file.",je);
                 } catch(IOException ioe)
                 {
-                    throw new FileReadException(string.Format("Unable to read playlist file {0}", FileURL), ioe);
+                    throw new FileReadException(string.Format("Unable to read playlist file {0}", fileURL), ioe);
                 }
 
             else
-                throw new FileNotFoundException(string.Format("Unable to read playlist file {0}",FileURL));
+                throw new FileNotFoundException(string.Format("Unable to read playlist file {0}", fileURL));
         }
 
         public void Save(string fileURL)
         {
-            FileURL = fileURL;
             // open JSON file and overwrite contents
             try
             {
-                File.WriteAllText(FileURL, JsonConvert.SerializeObject(this));
+                File.WriteAllText(fileURL, JsonConvert.SerializeObject(this));
             } catch(JsonException je)
             {
                 throw new SerializationException("Unable to serialize playlist file.", je);
             }
             catch (IOException ioe)
             {
-                throw new FileReadException(string.Format("Unable to write playlist file {0}", FileURL), ioe);
+                throw new FileReadException(string.Format("Unable to write playlist file {0}", fileURL), ioe);
             }
         }
         #endregion
 
-        #region Exceptions
-        public class FileNotFoundException : Exception
+
+    }
+
+    public class PlayListList : List<PlayList>
+    {
+        #region Fields / Properties
+        public int Id { get; set; }
+        public string FileURL { get; set; }
+        #endregion
+
+        #region Constructors
+        public PlayListList() { }
+        public PlayListList(string fileURL)
         {
-            public FileNotFoundException(string msg) : base(msg) { }
-        }
-        public class FileReadException : Exception
-        {
-            public FileReadException(string msg) : base(msg) { }
-            public FileReadException(string msg, Exception innerException) : base(msg, innerException) { }
-        }
-        public class SerializationException : Exception
-        {
-            public SerializationException(string msg, Exception innerException) : base(msg, innerException) { }
+            Load(fileURL);
         }
         #endregion
 
+        #region Methods
+        public void Load(string fileURL)
+        {
+            FileURL = fileURL;
+            Clear();
+
+            // open JSON file and deserialize
+            if (File.Exists(FileURL))
+                try
+                {
+                    PlayListList temppl = JsonConvert.DeserializeObject<PlayListList>(File.ReadAllText(FileURL));
+                }
+                catch (JsonException je)
+                {
+                    throw new SerializationException("Unable to deserialize master playlist file.", je);
+                }
+                catch (IOException ioe)
+                {
+                    throw new FileReadException(string.Format("Unable to read master playlist file {0}", FileURL), ioe);
+                }
+
+            else
+                throw new FileNotFoundException(string.Format("Unable to read master playlist file {0}", FileURL));
+
+        }
+
+        #endregion
     }
+
+    #region Exceptions
+    public class FileNotFoundException : Exception
+    {
+        public FileNotFoundException(string msg) : base(msg) { }
+    }
+    public class FileReadException : Exception
+    {
+        public FileReadException(string msg) : base(msg) { }
+        public FileReadException(string msg, Exception innerException) : base(msg, innerException) { }
+    }
+    public class SerializationException : Exception
+    {
+        public SerializationException(string msg, Exception innerException) : base(msg, innerException) { }
+    }
+    #endregion
 }
