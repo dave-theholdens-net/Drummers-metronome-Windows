@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
 namespace Drummers_metronome_Windows
@@ -81,5 +82,12 @@ namespace Drummers_metronome_Windows
             dgvSongs.DataSource = MyPlayList.Songs;
         }
         #endregion
+
+        private void dgvSongs_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PlaylistEntry ple = MyPlayList.Songs.ElementAt(e.RowIndex);
+            PlayListItemEditor plie = new PlayListItemEditor(ple);
+            plie.Show();            
+        }
     }
 }

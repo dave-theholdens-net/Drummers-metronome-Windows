@@ -51,8 +51,9 @@
             this.dgvSongs.Name = "dgvSongs";
             this.dgvSongs.RowHeadersVisible = false;
             this.dgvSongs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dgvSongs.Size = new System.Drawing.Size(610, 426);
+            this.dgvSongs.Size = new System.Drawing.Size(844, 542);
             this.dgvSongs.TabIndex = 0;
+            this.dgvSongs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSongs_CellDoubleClick);
             // 
             // txtName
             // 
@@ -122,7 +123,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1034, 566);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblGroup);
             this.Controls.Add(this.txtGroup);

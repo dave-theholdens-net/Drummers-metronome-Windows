@@ -31,7 +31,7 @@
             this.lblPosition = new System.Windows.Forms.Label();
             this.txtPosition = new System.Windows.Forms.NumericUpDown();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.txtCountIn = new System.Windows.Forms.NumericUpDown();
             this.lblCountIn = new System.Windows.Forms.Label();
             this.txtBeatsPerMeasure = new System.Windows.Forms.NumericUpDown();
@@ -47,6 +47,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnAddPageTurn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCountIn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBeatsPerMeasure)).BeginInit();
@@ -66,9 +68,19 @@
             // txtPosition
             // 
             this.txtPosition.Location = new System.Drawing.Point(57, 8);
+            this.txtPosition.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.txtPosition.Name = "txtPosition";
             this.txtPosition.Size = new System.Drawing.Size(40, 20);
             this.txtPosition.TabIndex = 2;
+            this.txtPosition.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lblTitle
             // 
@@ -79,12 +91,12 @@
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Title";
             // 
-            // textBox1
+            // txtTitle
             // 
-            this.textBox1.Location = new System.Drawing.Point(154, 8);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 20);
-            this.textBox1.TabIndex = 4;
+            this.txtTitle.Location = new System.Drawing.Point(154, 8);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(180, 20);
+            this.txtTitle.TabIndex = 4;
             // 
             // txtCountIn
             // 
@@ -104,15 +116,25 @@
             // 
             // txtBeatsPerMeasure
             // 
-            this.txtBeatsPerMeasure.Location = new System.Drawing.Point(579, 8);
+            this.txtBeatsPerMeasure.Location = new System.Drawing.Point(583, 8);
+            this.txtBeatsPerMeasure.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.txtBeatsPerMeasure.Name = "txtBeatsPerMeasure";
             this.txtBeatsPerMeasure.Size = new System.Drawing.Size(40, 20);
             this.txtBeatsPerMeasure.TabIndex = 8;
+            this.txtBeatsPerMeasure.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lblBeatsPerMeasure
             // 
             this.lblBeatsPerMeasure.AutoSize = true;
-            this.lblBeatsPerMeasure.Location = new System.Drawing.Point(477, 11);
+            this.lblBeatsPerMeasure.Location = new System.Drawing.Point(481, 11);
             this.lblBeatsPerMeasure.Name = "lblBeatsPerMeasure";
             this.lblBeatsPerMeasure.Size = new System.Drawing.Size(96, 13);
             this.lblBeatsPerMeasure.TabIndex = 7;
@@ -138,9 +160,9 @@
             // 
             // pbAlbumArt
             // 
-            this.pbAlbumArt.Location = new System.Drawing.Point(57, 63);
+            this.pbAlbumArt.Location = new System.Drawing.Point(12, 63);
             this.pbAlbumArt.Name = "pbAlbumArt";
-            this.pbAlbumArt.Size = new System.Drawing.Size(50, 50);
+            this.pbAlbumArt.Size = new System.Drawing.Size(250, 250);
             this.pbAlbumArt.TabIndex = 11;
             this.pbAlbumArt.TabStop = false;
             // 
@@ -165,9 +187,24 @@
             // txtTempo
             // 
             this.txtTempo.Location = new System.Drawing.Point(694, 8);
+            this.txtTempo.Maximum = new decimal(new int[] {
+            299,
+            0,
+            0,
+            0});
+            this.txtTempo.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.txtTempo.Name = "txtTempo";
             this.txtTempo.Size = new System.Drawing.Size(40, 20);
             this.txtTempo.TabIndex = 15;
+            this.txtTempo.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // lblTempo
             // 
@@ -198,27 +235,46 @@
             // 
             // txtNotes
             // 
-            this.txtNotes.Location = new System.Drawing.Point(230, 63);
-            this.txtNotes.MinimumSize = new System.Drawing.Size(500, 20);
+            this.txtNotes.Location = new System.Drawing.Point(268, 92);
             this.txtNotes.Multiline = true;
             this.txtNotes.Name = "txtNotes";
-            this.txtNotes.Size = new System.Drawing.Size(504, 50);
+            this.txtNotes.Size = new System.Drawing.Size(466, 221);
             this.txtNotes.TabIndex = 19;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(189, 65);
+            this.label2.Location = new System.Drawing.Point(268, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 18;
             this.label2.Text = "Notes";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(447, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(62, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Page Turns";
+            // 
+            // btnAddPageTurn
+            // 
+            this.btnAddPageTurn.Location = new System.Drawing.Point(526, 59);
+            this.btnAddPageTurn.Name = "btnAddPageTurn";
+            this.btnAddPageTurn.Size = new System.Drawing.Size(20, 20);
+            this.btnAddPageTurn.TabIndex = 21;
+            this.btnAddPageTurn.Text = "+";
+            this.btnAddPageTurn.UseVisualStyleBackColor = true;
+            // 
             // PlayListItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 121);
+            this.ClientSize = new System.Drawing.Size(745, 321);
+            this.Controls.Add(this.btnAddPageTurn);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtNotes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnChart);
@@ -234,7 +290,7 @@
             this.Controls.Add(this.lblBeatsPerMeasure);
             this.Controls.Add(this.txtCountIn);
             this.Controls.Add(this.lblCountIn);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.txtPosition);
             this.Controls.Add(this.lblPosition);
@@ -256,7 +312,7 @@
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.NumericUpDown txtPosition;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.NumericUpDown txtCountIn;
         private System.Windows.Forms.Label lblCountIn;
         private System.Windows.Forms.NumericUpDown txtBeatsPerMeasure;
@@ -272,5 +328,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNotes;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAddPageTurn;
     }
 }
