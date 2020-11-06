@@ -122,6 +122,25 @@ namespace Drummers_metronome_Windows
         }
         #endregion
 
+        #region Methods
+        public Boolean PropertiesMatch(PlaylistEntry other)
+        {
+            if (Id != other.Id) return false;
+            if (PlayListId != other.PlayListId) return false;
+            if (OrdinalPosition != other.OrdinalPosition) return false;
+            if (Title != other.Title) return false;
+            if (CountIn != other.CountIn) return false;
+            if (BeatsPerMeasure != other.BeatsPerMeasure) return false;
+            if (Tempo != other.Tempo) return false;
+            if (SongFileURL != other.SongFileURL) return false;
+            if (BackingTracksURL != other.BackingTracksURL) return false;
+            if (ChartURL != other.ChartURL) return false;
+            if (Notes != other.Notes) return false;
+
+            return true;
+        }
+        #endregion
+
         #region Exceptions
         public class ValueOutOfRangeException : Exception
         {

@@ -114,7 +114,9 @@ namespace Drummers_metronome_Windows
             PlaylistEntry ple = MyPlayList.Songs.ElementAt(rowIndex);
             if (ple != null)
             {
-                PlayListItemEditor plie = new PlayListItemEditor(ple);
+                // clone a copy of the play list entry for the editor screen to work with
+                PlaylistEntry clonePle = Newtonsoft.Json.JsonConvert.DeserializeObject<PlaylistEntry>(Newtonsoft.Json.JsonConvert.SerializeObject(ple));
+                PlayListItemEditor plie = new PlayListItemEditor(clonePle);
                 plie.FormClosed += onEditorClose;
 
                 // Set editor window position and display it
@@ -126,13 +128,32 @@ namespace Drummers_metronome_Windows
         }
         private void UpdateSetListFromEditor(object sender)
         {
-            // update playlist item and write changes to disk
+            // update playlist item and write any changes to disk
             PlayListItemEditor plie = (PlayListItemEditor)sender;
             PlaylistEntry ple = plie.MyPlayListEntry;
-            var x = MyPlayList.Songs.First(i => i.Id == ple.Id);
-            var ndx = MyPlayList.Songs.IndexOf(x);
-            MyPlayList.Songs[ndx] = ple;
-            MyPlayList.Save(FileURL);
+            if (ple != null)
+            {
+                var x = MyPlayList.Songs.First(i => i.Id == ple.Id);
+                if (x != null)
+                {
+                    if(ple.PropertiesMatch(x) == false)
+                    {
+                        var ndx = MyPlayList.Songs.IndexOf(x);
+                        var resortRequired = (ple.OrdinalPosition == x.OrdinalPosition);
+                        if (ndx > -1)
+                        {
+                            MyPlayList.Songs[ndx] = ple;
+                            MyPlayList.Save(FileURL);
+                        }   
+                        if(resortRequired)
+                        {
+                            MyPlayList.Songs.Sort();
+                            dgvSongs.Refresh();
+                        }
+                    }
+                }
+            }
+
         }
         #endregion
     }
