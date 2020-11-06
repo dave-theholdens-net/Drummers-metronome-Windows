@@ -7,7 +7,11 @@ namespace Drummers_metronome_Windows
 {
     public partial class PlayListItemEditor : Form
     {
-        PlaylistEntry MyPlayListEntry;
+        #region Fields / Properties
+        public readonly PlaylistEntry MyPlayListEntry;
+        #endregion
+
+        #region Constructors
 
         public PlayListItemEditor()
         {
@@ -17,19 +21,21 @@ namespace Drummers_metronome_Windows
         {
             InitializeComponent();
             MyPlayListEntry = playListEntry;
-            LoadScreen();
+            BindScreenControls();
         }
+        #endregion
 
-        private void LoadScreen()
+        #region Methods
+        private void BindScreenControls()
         {
             if (MyPlayListEntry != null)
-            {
-                txtPosition.Text = MyPlayListEntry.OrdinalPosition.ToString();
-                txtTitle.Text = MyPlayListEntry.Title;
-                txtCountIn.Text = MyPlayListEntry.CountIn.ToString();
-                txtBeatsPerMeasure.Text = MyPlayListEntry.BeatsPerMeasure.ToString();
-                txtTempo.Text = MyPlayListEntry.Tempo.ToString();
-                txtNotes.Text = MyPlayListEntry.Notes;
+            {                
+                txtPosition.DataBindings.Add("Text", MyPlayListEntry, "OrdinalPosition");
+                txtTitle.DataBindings.Add("Text", MyPlayListEntry, "Title");
+                txtCountIn.DataBindings.Add("Text", MyPlayListEntry, "CountIn");
+                txtBeatsPerMeasure.DataBindings.Add("Text", MyPlayListEntry, "BeatsPerMeasure");
+                txtTempo.DataBindings.Add("Text", MyPlayListEntry, "Tempo");
+                txtNotes.DataBindings.Add("Text", MyPlayListEntry, "Notes");
                 if(string.IsNullOrWhiteSpace(MyPlayListEntry.SongFileURL) == true)
                 {                   
                     pbAlbumArt.Visible = true;
@@ -53,6 +59,12 @@ namespace Drummers_metronome_Windows
                 }
 
             }
+        }
+        #endregion
+
+        private void PlayListItemEditor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            string test = "";
         }
     }
 }

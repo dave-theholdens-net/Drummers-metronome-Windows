@@ -49,6 +49,7 @@
             this.dgvSongs.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dgvSongs.Location = new System.Drawing.Point(178, 12);
             this.dgvSongs.Name = "dgvSongs";
+            this.dgvSongs.ReadOnly = true;
             this.dgvSongs.RowHeadersVisible = false;
             this.dgvSongs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvSongs.Size = new System.Drawing.Size(844, 542);

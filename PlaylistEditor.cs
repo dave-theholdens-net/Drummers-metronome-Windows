@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -38,6 +40,15 @@ namespace Drummers_metronome_Windows
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
                 MyPlayList.Save(saveFileDialog1.FileName);
+        }
+        private void dgvSongs_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            OpenEditor(e.RowIndex);
+        }
+        void onEditorClose(object sender, FormClosedEventArgs e)
+        {
+            // read in values from editor data object and update data store
+            UpdateSetListFromEditor(sender);
         }
         #endregion
 
@@ -81,13 +92,48 @@ namespace Drummers_metronome_Windows
             MyPlayList.Songs.Sort();
             dgvSongs.DataSource = MyPlayList.Songs;
         }
-        #endregion
-
-        private void dgvSongs_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private Point CalculatePopupPosition(int rowIndex, int controlHeight)
         {
-            PlaylistEntry ple = MyPlayList.Songs.ElementAt(e.RowIndex);
-            PlayListItemEditor plie = new PlayListItemEditor(ple);
-            plie.Show();            
+            int VerticalPadding = 5;
+            int y;
+            Rectangle listRect = dgvSongs.Bounds;
+            Rectangle rowRect = dgvSongs.GetRowDisplayRectangle(rowIndex, true);
+
+            if ((rowRect.Bottom + VerticalPadding + controlHeight) > listRect.Bottom)
+                // no room underneath so display above
+                y = rowRect.Top - (VerticalPadding + Height);
+            else
+                // display underneath
+                y = rowRect.Bottom + VerticalPadding;
+
+            // Have to map result to screen coordinate position instead of client coordinates
+            return this.PointToScreen(new Point(rowRect.X, y));
         }
+        private void OpenEditor(int rowIndex)
+        {
+            PlaylistEntry ple = MyPlayList.Songs.ElementAt(rowIndex);
+            if (ple != null)
+            {
+                PlayListItemEditor plie = new PlayListItemEditor(ple);
+                plie.FormClosed += onEditorClose;
+
+                // Set editor window position and display it
+                plie.Location = CalculatePopupPosition(rowIndex, plie.Height);
+                plie.Left = plie.Location.X + dgvSongs.Location.X;
+                plie.Top = plie.Location.Y + dgvSongs.Location.Y;
+                plie.Show();
+            }
+        }
+        private void UpdateSetListFromEditor(object sender)
+        {
+            // update playlist item and write changes to disk
+            PlayListItemEditor plie = (PlayListItemEditor)sender;
+            PlaylistEntry ple = plie.MyPlayListEntry;
+            var x = MyPlayList.Songs.First(i => i.Id == ple.Id);
+            var ndx = MyPlayList.Songs.IndexOf(x);
+            MyPlayList.Songs[ndx] = ple;
+            MyPlayList.Save(FileURL);
+        }
+        #endregion
     }
 }
