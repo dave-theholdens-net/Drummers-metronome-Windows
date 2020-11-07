@@ -64,6 +64,14 @@ namespace Drummers_metronome_Windows
             // read in values from editor data object and update data store
             UpdateSetListFromEditor(sender);
         }
+        private void contextMenuStripSongs_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // disable move song up option if selected row is at top of list
+            toolStripMenuItemContextMoveUp.Enabled = (dgvSongs.CurrentRow.Index > 0);
+
+            // disable move song down if selected row is at the bottom of the list
+            toolStripMenuItemContextMoveDown.Enabled = (dgvSongs.CurrentRow.Index < (dgvSongs.Rows.Count - 1));
+        }
         #endregion
 
         #region Methods
@@ -169,9 +177,6 @@ namespace Drummers_metronome_Windows
             }
 
         }
-
         #endregion
-
-
     }
 }

@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSongs = new System.Windows.Forms.DataGridView();
+            this.contextMenuStripSongs = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemContextAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemContextRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemContextMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemContextMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -38,7 +44,17 @@
             this.txtGroup = new System.Windows.Forms.TextBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.dlgSave = new System.Windows.Forms.SaveFileDialog();
+            this.menuStripPlaylistEditor = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItemPlaylist = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemPlaylistItems = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSongs)).BeginInit();
+            this.contextMenuStripSongs.SuspendLayout();
+            this.menuStripPlaylistEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvSongs
@@ -46,6 +62,7 @@
             this.dgvSongs.AllowUserToAddRows = false;
             this.dgvSongs.AllowUserToDeleteRows = false;
             this.dgvSongs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvSongs.CausesValidation = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -55,8 +72,10 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvSongs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSongs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSongs.ContextMenuStrip = this.contextMenuStripSongs;
             this.dgvSongs.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dgvSongs.Location = new System.Drawing.Point(178, 12);
+            this.dgvSongs.MultiSelect = false;
             this.dgvSongs.Name = "dgvSongs";
             this.dgvSongs.ReadOnly = true;
             this.dgvSongs.RowHeadersVisible = false;
@@ -64,9 +83,43 @@
             this.dgvSongs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSongs.Size = new System.Drawing.Size(844, 542);
             this.dgvSongs.TabIndex = 0;
-            this.dgvSongs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSongs_CellDoubleClick);
             this.dgvSongs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSongs_KeyDown);
             this.dgvSongs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvSongs_KeyPress);
+            // 
+            // contextMenuStripSongs
+            // 
+            this.contextMenuStripSongs.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemContextAdd,
+            this.toolStripMenuItemContextRemove,
+            this.toolStripMenuItemContextMoveUp,
+            this.toolStripMenuItemContextMoveDown});
+            this.contextMenuStripSongs.Name = "contextMenuStripSongs";
+            this.contextMenuStripSongs.Size = new System.Drawing.Size(189, 92);
+            this.contextMenuStripSongs.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripSongs_Opening);
+            // 
+            // toolStripMenuItemContextAdd
+            // 
+            this.toolStripMenuItemContextAdd.Name = "toolStripMenuItemContextAdd";
+            this.toolStripMenuItemContextAdd.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItemContextAdd.Text = "Add a song here";
+            // 
+            // toolStripMenuItemContextRemove
+            // 
+            this.toolStripMenuItemContextRemove.Name = "toolStripMenuItemContextRemove";
+            this.toolStripMenuItemContextRemove.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItemContextRemove.Text = "Remove this song";
+            // 
+            // toolStripMenuItemContextMoveUp
+            // 
+            this.toolStripMenuItemContextMoveUp.Name = "toolStripMenuItemContextMoveUp";
+            this.toolStripMenuItemContextMoveUp.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItemContextMoveUp.Text = "Move this song up";
+            // 
+            // toolStripMenuItemContextMoveDown
+            // 
+            this.toolStripMenuItemContextMoveDown.Name = "toolStripMenuItemContextMoveDown";
+            this.toolStripMenuItemContextMoveDown.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItemContextMoveDown.Text = "Move this song down";
             // 
             // txtName
             // 
@@ -132,6 +185,66 @@
             this.dlgSave.DefaultExt = "dat";
             this.dlgSave.Title = "Save Set List";
             // 
+            // menuStripPlaylistEditor
+            // 
+            this.menuStripPlaylistEditor.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemPlaylist,
+            this.toolStripMenuItemPlaylistItems});
+            this.menuStripPlaylistEditor.Location = new System.Drawing.Point(0, 0);
+            this.menuStripPlaylistEditor.Name = "menuStripPlaylistEditor";
+            this.menuStripPlaylistEditor.Size = new System.Drawing.Size(1034, 24);
+            this.menuStripPlaylistEditor.TabIndex = 8;
+            this.menuStripPlaylistEditor.Text = "Playlist";
+            // 
+            // toolStripMenuItemPlaylist
+            // 
+            this.toolStripMenuItemPlaylist.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.toolStripMenuItemPlaylist.Name = "toolStripMenuItemPlaylist";
+            this.toolStripMenuItemPlaylist.Size = new System.Drawing.Size(56, 20);
+            this.toolStripMenuItemPlaylist.Text = "Playlist";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(217, 22);
+            this.toolStripMenuItem1.Text = "Make a new playlist";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(217, 22);
+            this.toolStripMenuItem2.Text = "Remove this playlist";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(217, 22);
+            this.toolStripMenuItem3.Text = "Make a copy of this playlist";
+            // 
+            // toolStripMenuItemPlaylistItems
+            // 
+            this.toolStripMenuItemPlaylistItems.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5});
+            this.toolStripMenuItemPlaylistItems.Name = "toolStripMenuItemPlaylistItems";
+            this.toolStripMenuItemPlaylistItems.Size = new System.Drawing.Size(51, 20);
+            this.toolStripMenuItemPlaylistItems.Text = "Songs";
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(246, 22);
+            this.toolStripMenuItem4.Text = "Add a song to this playlist";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(246, 22);
+            this.toolStripMenuItem5.Text = "Remove a song from this playlist";
+            // 
             // PlaylistEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,10 +258,15 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.dgvSongs);
+            this.Controls.Add(this.menuStripPlaylistEditor);
+            this.MainMenuStrip = this.menuStripPlaylistEditor;
             this.Name = "PlaylistEditor";
             this.ShowIcon = false;
             this.Text = "Playlist Editor";
             ((System.ComponentModel.ISupportInitialize)(this.dgvSongs)).EndInit();
+            this.contextMenuStripSongs.ResumeLayout(false);
+            this.menuStripPlaylistEditor.ResumeLayout(false);
+            this.menuStripPlaylistEditor.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +283,18 @@
         private System.Windows.Forms.TextBox txtGroup;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.SaveFileDialog dlgSave;
+        private System.Windows.Forms.MenuStrip menuStripPlaylistEditor;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPlaylist;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemPlaylistItems;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripSongs;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemContextAdd;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemContextRemove;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemContextMoveUp;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemContextMoveDown;
     }
 }
