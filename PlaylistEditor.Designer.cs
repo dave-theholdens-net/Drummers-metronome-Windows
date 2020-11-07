@@ -50,8 +50,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemPlaylistItems = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemAddSong = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRemoveSong = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSongs)).BeginInit();
             this.contextMenuStripSongs.SuspendLayout();
             this.menuStripPlaylistEditor.SuspendLayout();
@@ -94,7 +94,7 @@
             this.toolStripMenuItemContextMoveUp,
             this.toolStripMenuItemContextMoveDown});
             this.contextMenuStripSongs.Name = "contextMenuStripSongs";
-            this.contextMenuStripSongs.Size = new System.Drawing.Size(189, 92);
+            this.contextMenuStripSongs.Size = new System.Drawing.Size(189, 114);
             this.contextMenuStripSongs.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripSongs_Opening);
             // 
             // toolStripMenuItemContextAdd
@@ -102,12 +102,14 @@
             this.toolStripMenuItemContextAdd.Name = "toolStripMenuItemContextAdd";
             this.toolStripMenuItemContextAdd.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItemContextAdd.Text = "Add a song here";
+            this.toolStripMenuItemContextAdd.Click += new System.EventHandler(this.toolStripMenuItemContextAdd_Click);
             // 
             // toolStripMenuItemContextRemove
             // 
             this.toolStripMenuItemContextRemove.Name = "toolStripMenuItemContextRemove";
             this.toolStripMenuItemContextRemove.Size = new System.Drawing.Size(188, 22);
             this.toolStripMenuItemContextRemove.Text = "Remove this song";
+            this.toolStripMenuItemContextRemove.Click += new System.EventHandler(this.toolStripMenuItemContextRemove_Click);
             // 
             // toolStripMenuItemContextMoveUp
             // 
@@ -227,23 +229,25 @@
             // toolStripMenuItemPlaylistItems
             // 
             this.toolStripMenuItemPlaylistItems.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem5});
+            this.toolStripMenuItemAddSong,
+            this.toolStripMenuItemRemoveSong});
             this.toolStripMenuItemPlaylistItems.Name = "toolStripMenuItemPlaylistItems";
             this.toolStripMenuItemPlaylistItems.Size = new System.Drawing.Size(51, 20);
             this.toolStripMenuItemPlaylistItems.Text = "Songs";
             // 
-            // toolStripMenuItem4
+            // toolStripMenuItemAddSong
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(246, 22);
-            this.toolStripMenuItem4.Text = "Add a song to this playlist";
+            this.toolStripMenuItemAddSong.Name = "toolStripMenuItemAddSong";
+            this.toolStripMenuItemAddSong.Size = new System.Drawing.Size(246, 22);
+            this.toolStripMenuItemAddSong.Text = "Add a song to this playlist";
+            this.toolStripMenuItemAddSong.Click += new System.EventHandler(this.toolStripMenuItemAddSong_Click);
             // 
-            // toolStripMenuItem5
+            // toolStripMenuItemRemoveSong
             // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(246, 22);
-            this.toolStripMenuItem5.Text = "Remove a song from this playlist";
+            this.toolStripMenuItemRemoveSong.Name = "toolStripMenuItemRemoveSong";
+            this.toolStripMenuItemRemoveSong.Size = new System.Drawing.Size(246, 22);
+            this.toolStripMenuItemRemoveSong.Text = "Remove a song from this playlist";
+            this.toolStripMenuItemRemoveSong.Click += new System.EventHandler(this.toolStripMenuItemRemoveSong_Click);
             // 
             // PlaylistEditor
             // 
@@ -289,8 +293,8 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemAddSong;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRemoveSong;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSongs;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemContextAdd;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemContextRemove;

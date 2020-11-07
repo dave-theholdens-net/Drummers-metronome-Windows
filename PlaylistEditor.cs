@@ -11,6 +11,7 @@ namespace Drummers_metronome_Windows
         #region Fields / Properties
         public PlayList MyPlayList {get; set; }
         public string FileURL = "TestList.dat";
+        private BindingSource DataSource = new BindingSource();
         #endregion
 
         #region Constructors
@@ -24,6 +25,7 @@ namespace Drummers_metronome_Windows
             InitializeComponent();
             FileURL = fileURL;
             MyPlayList = new PlayList(FileURL);
+            DataSource.DataSource = MyPlayList.Songs;
             LoadScreen();
         }
         #endregion
@@ -66,11 +68,35 @@ namespace Drummers_metronome_Windows
         }
         private void contextMenuStripSongs_Opening(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // disable move song up option if selected row is at top of list
-            toolStripMenuItemContextMoveUp.Enabled = (dgvSongs.CurrentRow.Index > 0);
+            if(dgvSongs.RowCount > 0)
+            {
+                // disable move song up option if selected row is at top of list
+                toolStripMenuItemContextMoveUp.Enabled = (dgvSongs.CurrentRow.Index > 0);
 
-            // disable move song down if selected row is at the bottom of the list
-            toolStripMenuItemContextMoveDown.Enabled = (dgvSongs.CurrentRow.Index < (dgvSongs.Rows.Count - 1));
+                // disable move song down if selected row is at the bottom of the list
+                toolStripMenuItemContextMoveDown.Enabled = (dgvSongs.CurrentRow.Index < (dgvSongs.Rows.Count - 1));
+            } 
+            else
+            {
+                toolStripMenuItemContextMoveUp.Enabled = true;
+                toolStripMenuItemContextMoveDown.Enabled = true;
+            }
+        }
+        private void toolStripMenuItemContextAdd_Click(object sender, System.EventArgs e)
+        {
+            AddEntryToList();
+        }
+        private void toolStripMenuItemAddSong_Click(object sender, System.EventArgs e)
+        {
+            AddEntryToList();
+        }
+        private void toolStripMenuItemRemoveSong_Click(object sender, System.EventArgs e)
+        {
+            RemoveEntryFromList();
+        }
+        private void toolStripMenuItemContextRemove_Click(object sender, System.EventArgs e)
+        {
+            RemoveEntryFromList();
         }
         #endregion
 
@@ -112,7 +138,8 @@ namespace Drummers_metronome_Windows
             dgvSongs.Columns.Add(col);
 
             MyPlayList.Songs.Sort();
-            dgvSongs.DataSource = MyPlayList.Songs;
+            dgvSongs.DataSource = DataSource;
+            DataSource.ResetBindings(true);            
         }
         private Point CalculatePopupPosition(int rowIndex, int controlHeight)
         {
@@ -176,6 +203,58 @@ namespace Drummers_metronome_Windows
                 }
             }
 
+        }
+        private void AddEntryToList()
+        {
+            // find the largest ID in the list
+            int newId = 0;
+
+            // find the ordinal position of the currently selected grid row
+            int insertIndex = -1;
+            if (dgvSongs.CurrentRow != null)
+                insertIndex = dgvSongs.CurrentRow.Index;
+
+            // increase the ordinal position of all rows underneath
+            if(MyPlayList.Songs != null)
+                MyPlayList.Songs.ForEach(u => {
+                    if (u.OrdinalPosition > (insertIndex + 1))
+                        u.OrdinalPosition += 1;
+                    if (newId < u.Id)
+                        newId = u.Id;
+                });
+
+            // create new entry for the list
+            PlaylistEntry ple = new PlaylistEntry()
+            {
+                OrdinalPosition = insertIndex + 2,
+                Title = "New song",
+                Id = (newId + 1),
+                CountIn = 4,
+                BeatsPerMeasure = 4,
+                Tempo = 60
+            };
+
+            // insert into list
+            MyPlayList.Songs.Add(ple);
+            MyPlayList.Songs.Sort();
+
+            // force update of data grid
+            DataSource.ResetBindings(true);
+
+            // Open new song in editor
+            dgvSongs.Rows[insertIndex].Selected = true;
+            OpenEditor(insertIndex);
+
+        }
+        private void RemoveEntryFromList()
+        {
+            // find the ordinal position of the currently selected grid row and use it to find data object
+            int ndx = dgvSongs.CurrentRow.Index;
+            PlaylistEntry remove = (PlaylistEntry)dgvSongs.Rows[ndx].DataBoundItem;
+
+            // remove song from list and refresh data grid
+            MyPlayList.Songs.Remove(remove);
+            DataSource.ResetBindings(true);
         }
         #endregion
     }

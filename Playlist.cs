@@ -13,7 +13,7 @@ namespace Drummers_metronome_Windows
         public int Id {
             get { return id; }
             set {
-                if (value > 0)
+                if (value >= 0)
                     id = value;
                 else
                     throw new ValueOutOfRangeException();
@@ -24,7 +24,7 @@ namespace Drummers_metronome_Windows
         public int PlayListId {
             get { return playListId; }
             set {
-                if (value > 0)
+                if (value >= 0)
                     playListId = value;
                 else
                     throw new ValueOutOfRangeException();
@@ -167,6 +167,7 @@ namespace Drummers_metronome_Windows
         public PlayList(string fileURL)
         {
             Load(fileURL);
+            if(Songs == null) Songs = new List<PlaylistEntry>();
         }
         #endregion
 
