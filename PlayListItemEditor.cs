@@ -66,5 +66,11 @@ namespace Drummers_metronome_Windows
         {
             string test = "";
         }
+
+        private void PlayListItemEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Close();
+        }
     }
 }

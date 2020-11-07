@@ -45,6 +45,20 @@ namespace Drummers_metronome_Windows
         {
             OpenEditor(e.RowIndex);
         }
+        private void dgvSongs_KeyDown(object sender, KeyEventArgs e)
+        {
+            // ENTER key opens the editor
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridView songs = (DataGridView)sender;                
+                OpenEditor(songs.CurrentRow.Index);
+                e.Handled = true;
+            }
+        }
+        private void dgvSongs_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
         void onEditorClose(object sender, FormClosedEventArgs e)
         {
             // read in values from editor data object and update data store
@@ -155,6 +169,9 @@ namespace Drummers_metronome_Windows
             }
 
         }
+
         #endregion
+
+
     }
 }

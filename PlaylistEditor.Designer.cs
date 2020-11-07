@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvSongs = new System.Windows.Forms.DataGridView();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
@@ -45,6 +46,14 @@
             this.dgvSongs.AllowUserToAddRows = false;
             this.dgvSongs.AllowUserToDeleteRows = false;
             this.dgvSongs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSongs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSongs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSongs.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dgvSongs.Location = new System.Drawing.Point(178, 12);
@@ -52,9 +61,12 @@
             this.dgvSongs.ReadOnly = true;
             this.dgvSongs.RowHeadersVisible = false;
             this.dgvSongs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvSongs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSongs.Size = new System.Drawing.Size(844, 542);
             this.dgvSongs.TabIndex = 0;
             this.dgvSongs.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSongs_CellDoubleClick);
+            this.dgvSongs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSongs_KeyDown);
+            this.dgvSongs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvSongs_KeyPress);
             // 
             // txtName
             // 

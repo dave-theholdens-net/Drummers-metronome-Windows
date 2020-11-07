@@ -295,10 +295,12 @@
             this.Controls.Add(this.txtPosition);
             this.Controls.Add(this.lblPosition);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.Name = "PlayListItemEditor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "PlayListItemEditor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlayListItemEditor_FormClosed);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PlayListItemEditor_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.txtPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCountIn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBeatsPerMeasure)).EndInit();
