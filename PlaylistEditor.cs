@@ -12,6 +12,9 @@ namespace Drummers_metronome_Windows
         public PlayList MyPlayList {get; set; }
         public string FileURL = "TestList.dat";
         private BindingSource DataSource = new BindingSource();
+        private Rectangle dragBoxFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
         #endregion
 
         #region Constructors
@@ -98,6 +101,71 @@ namespace Drummers_metronome_Windows
         {
             RemoveEntryFromList();
         }
+        #region drag and drop support
+        private void dgvSongs_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                // If the mouse moves outside the rectangle, start the drag.
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                {
+                    // Proceed with the drag and drop, passing in the list item.                    
+                    DragDropEffects dropEffect = dgvSongs.DoDragDrop(
+                          dgvSongs.Rows[rowIndexFromMouseDown],
+                          DragDropEffects.Move);
+                }
+            }
+        }
+        private void dgvSongs_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Get the index of the item the mouse is below.
+            rowIndexFromMouseDown = dgvSongs.HitTest(e.X, e.Y).RowIndex;
+
+            if (rowIndexFromMouseDown != -1)
+            {
+                // Remember the point where the mouse down occurred. 
+                // The DragSize indicates the size that the mouse can move 
+                // before a drag event should be started.                
+                Size dragSize = SystemInformation.DragSize;
+
+                // Create a rectangle using the DragSize, with the mouse position being
+                // at the center of the rectangle.
+                dragBoxFromMouseDown = new Rectangle(
+                          new Point(
+                            e.X - (dragSize.Width / 2),
+                            e.Y - (dragSize.Height / 2)),
+                      dragSize);
+            }
+            else
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                dragBoxFromMouseDown = Rectangle.Empty;
+        }
+        private void dgvSongs_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+        private void dgvSongs_DragDrop(object sender, DragEventArgs e)
+        {
+            // The mouse locations are relative to the screen, so they must be 
+            // converted to client coordinates.
+            Point clientPoint = dgvSongs.PointToClient(new Point(e.X, e.Y));
+
+            // Get the row index of the item the mouse is below. 
+            rowIndexOfItemUnderMouseToDrop = dgvSongs.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            // If the drag operation was a move then update ordinal positions.
+            if (e.Effect == DragDropEffects.Move)
+            {
+                PlaylistEntry sourceItem = (PlaylistEntry)dgvSongs.Rows[rowIndexFromMouseDown].DataBoundItem;
+                PlaylistEntry targetItem = (PlaylistEntry)dgvSongs.Rows[rowIndexOfItemUnderMouseToDrop].DataBoundItem;
+                int temp = sourceItem.OrdinalPosition;
+                sourceItem.OrdinalPosition = targetItem.OrdinalPosition;
+                targetItem.OrdinalPosition = temp;
+                DataSource.ResetBindings(false);
+            }
+        }
+        #endregion
         #endregion
 
         #region Methods
@@ -257,5 +325,5 @@ namespace Drummers_metronome_Windows
             DataSource.ResetBindings(true);
         }
         #endregion
-    }
+   }
 }

@@ -59,6 +59,7 @@
             // 
             // dgvSongs
             // 
+            this.dgvSongs.AllowDrop = true;
             this.dgvSongs.AllowUserToAddRows = false;
             this.dgvSongs.AllowUserToDeleteRows = false;
             this.dgvSongs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -83,8 +84,12 @@
             this.dgvSongs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSongs.Size = new System.Drawing.Size(844, 542);
             this.dgvSongs.TabIndex = 0;
+            this.dgvSongs.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvSongs_DragDrop);
+            this.dgvSongs.DragOver += new System.Windows.Forms.DragEventHandler(this.dgvSongs_DragOver);
             this.dgvSongs.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvSongs_KeyDown);
             this.dgvSongs.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvSongs_KeyPress);
+            this.dgvSongs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvSongs_MouseDown);
+            this.dgvSongs.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgvSongs_MouseMove);
             // 
             // contextMenuStripSongs
             // 
@@ -94,7 +99,7 @@
             this.toolStripMenuItemContextMoveUp,
             this.toolStripMenuItemContextMoveDown});
             this.contextMenuStripSongs.Name = "contextMenuStripSongs";
-            this.contextMenuStripSongs.Size = new System.Drawing.Size(189, 114);
+            this.contextMenuStripSongs.Size = new System.Drawing.Size(189, 92);
             this.contextMenuStripSongs.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripSongs_Opening);
             // 
             // toolStripMenuItemContextAdd
