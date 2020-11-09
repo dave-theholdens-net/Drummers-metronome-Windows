@@ -101,6 +101,7 @@ namespace Drummers_metronome_Windows
         {
             RemoveEntryFromList();
         }
+
         #region drag and drop support
         private void dgvSongs_MouseMove(object sender, MouseEventArgs e)
         {
@@ -162,6 +163,7 @@ namespace Drummers_metronome_Windows
                 int temp = sourceItem.OrdinalPosition;
                 sourceItem.OrdinalPosition = targetItem.OrdinalPosition;
                 targetItem.OrdinalPosition = temp;
+                MyPlayList.Songs.Sort();
                 DataSource.ResetBindings(false);
             }
         }
